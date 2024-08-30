@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Form, Input, Button, notification } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import axios from "axios";
+const { REACT_APP_BASE_URL } = process.env;
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Login = () => {
   const onFinish = async (values) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${REACT_APP_BASE_URL}/api/auth/login`,
         values
       );
       const { token } = response.data;
@@ -110,13 +111,13 @@ const Login = () => {
           </Form.Item>
 
           <p className="mt-8 text-right">
-            <a
-              href="#"
+            <Link
+              to={"/forgot-password"}
               className="no-underline text-base font-medium text-[#1565d8]"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Forgot Password
-            </a>
+            </Link>
           </p>
 
           <div className="mt-8 text-right">
