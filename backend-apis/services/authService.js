@@ -3,14 +3,14 @@ const generateToken = require("../utils/generateToken");
 const crypto = require("crypto");
 const emailService = require("./emailService");
 
-exports.register = async (name, email, password) => {
+exports.register = async (username, email, password, role) => {
   const userExists = await User.findOne({ email });
 
   if (userExists) {
     throw new Error("User already exists");
   }
 
-  const user = await User.create({ name, email, password });
+  const user = await User.create({ username, email, password, role });
   return generateToken(user._id);
 };
 

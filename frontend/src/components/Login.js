@@ -1,16 +1,50 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Background from "../assets/b6.jpg";
 import { Link } from "react-router-dom";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, notification } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
+import axios from "axios";
 
 const Login = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const navigate = useNavigate();
+
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        values
+      );
+      const { token } = response.data;
+
+      // Save token to localStorage
+      localStorage.setItem("token", token);
+
+      notification.success({
+        message: "Login Successful",
+        description:
+          "You have successfully logged in. Redirecting to the dashboard...",
+      });
+
+      // Redirect to dashboard after 2 seconds
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
+    } catch (error) {
+      notification.error({
+        message: "Login Failed",
+        description:
+          error.response?.data?.message ||
+          "Invalid credentials or something went wrong. Please try again.",
+      });
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    notification.error({
+      message: "Login Failed",
+      description: "Please check the form for errors and try again.",
+    });
   };
 
   return (

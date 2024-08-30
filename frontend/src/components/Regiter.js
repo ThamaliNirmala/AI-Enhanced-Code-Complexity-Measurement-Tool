@@ -1,18 +1,46 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Background from "../assets/b6.jpg";
 import { Link } from "react-router-dom";
-import { Form, Input, Button, Select } from "antd";
+import { Form, Input, Button, Select, notification } from "antd";
 import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons";
+import axios from "axios";
+const { REACT_APP_BASE_URL } = process.env;
 
 const { Option } = Select;
 
 const Register = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const navigate = useNavigate();
+
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post(
+        `${REACT_APP_BASE_URL}/api/auth/register`,
+        values
+      );
+      notification.success({
+        message: "Registration Successful",
+        description:
+          "You have successfully registered. Redirecting to login...",
+      });
+      setTimeout(() => {
+        navigate("/");
+      }, 2000); // Redirect after 2 seconds
+    } catch (error) {
+      notification.error({
+        message: "Registration Failed",
+        description:
+          error.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      });
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    notification.error({
+      message: "Registration Failed",
+      description: "Please check the form for errors and try again.",
+    });
   };
 
   return (
@@ -97,17 +125,19 @@ const Register = () => {
           <Form.Item
             name="confirm"
             label="Confirm Password"
-            dependencies={['password']}
+            dependencies={["password"]}
             hasFeedback
             rules={[
               { required: true, message: "Please confirm your password!" },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue('password') === value) {
+                  if (!value || getFieldValue("password") === value) {
                     return Promise.resolve();
                   }
                   return Promise.reject(
-                    new Error("The two passwords that you entered do not match!")
+                    new Error(
+                      "The two passwords that you entered do not match!"
+                    )
                   );
                 },
               }),
