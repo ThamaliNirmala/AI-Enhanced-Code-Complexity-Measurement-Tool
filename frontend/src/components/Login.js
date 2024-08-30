@@ -1,8 +1,18 @@
 import React from "react";
 import Background from "../assets/b6.jpg";
-// import Logo from "../assets/logo.svg";
+import { Link } from "react-router-dom";
+import { Form, Input, Button } from "antd";
+import { MailOutlined, LockOutlined } from "@ant-design/icons";
 
 const Login = () => {
+  const onFinish = (values) => {
+    console.log("Success:", values);
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
   return (
     <div className="grid grid-cols-2 h-screen">
       <div
@@ -14,57 +24,86 @@ const Login = () => {
           backgroundPosition: "center",
         }}
       ></div>
-      <div className="mx-36 ">
-        {/* <img src={Logo} className="mx-auto" /> */}
-        <h1 className="text-[#10002E] text-center font-bold text-[40px] uppercase inter mt-20">
-          Login
+      <div className="mx-36">
+        <h1 className="text-center font-bold mt-20 text-[#650D26]">
+          <span
+            className="text-[40px] uppercase"
+            style={{ fontFamily: "Montserrat Alternates" }}
+          >
+            CodeIQ
+          </span>
+          <span className="block text-2xl" style={{ fontFamily: "Inter" }}>
+            AI-Powered Code Complexity Analyzer
+          </span>
         </h1>
         <hr className="mt-12" />
 
-        <form class="">
-          <div class="mt-7">
-            <label for="email" class="text-sm font-bold inter text-[#10002E] ">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              class=" bg-[#F5F8FF] h-12 text-gray-900 text-sm inter bold rounded-lg mt-2 w-full p-2.5 "
-              required
+        <Form
+          name="login"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          layout="vertical"
+          className="mt-7"
+        >
+          <Form.Item
+            name="email"
+            label="Email"
+            rules={[
+              {
+                type: "email",
+                message: "The input is not a valid E-mail!",
+              },
+              { required: true, message: "Please input your email!" },
+            ]}
+            className="text-sm font-bold inter text-[#10002E]"
+          >
+            <Input
+              prefix={<MailOutlined />}
+              className="bg-[#F5F8FF] h-12 text-gray-900 text-sm inter bold rounded-lg w-full p-2.5"
             />
-          </div>
+          </Form.Item>
 
-          <div class="mt-7">
-            <label
-              for="password"
-              class="text-sm font-bold inter text-[#10002E] "
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              class=" bg-[#F5F8FF] h-12 text-gray-900 text-sm inter bold rounded-lg mt-2 w-full p-2.5 "
-              required
+          <Form.Item
+            name="password"
+            label="Password"
+            rules={[{ required: true, message: "Please input your password!" }]}
+            className="text-sm font-bold inter text-[#10002E]"
+          >
+            <Input.Password
+              prefix={<LockOutlined />}
+              className="bg-[#F5F8FF] h-12 text-gray-900 text-sm inter bold rounded-lg w-full p-2.5"
             />
-          </div>
+          </Form.Item>
+
           <p className="mt-8 text-right">
             <a
               href="#"
               className="no-underline text-base font-medium text-[#1565d8]"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              Fogot Password
+              Forgot Password
             </a>
           </p>
 
-          <button
-            type="submit"
-            class="text-white bg-[#002140] h-12 focus:outline-none w-full  font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-16 "
-          >
-            Log In
-          </button>
-        </form>
+          <div className="mt-8 text-right">
+            <Link
+              to={"/register"}
+              className="no-underline text-base font-medium text-[#1565d8]"
+            >
+              Create account
+            </Link>
+          </div>
+
+          <Form.Item className="mt-16">
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="w-full h-12 bg-[#002140] text-white font-medium rounded-lg text-sm px-5 py-2.5"
+            >
+              Log In
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
     </div>
   );
