@@ -9,6 +9,7 @@ import ManagerDashboard from "./components/ManagerDashboard";
 import UserDashboard from "./components/UserDashboard";
 import NavBar from "./components/NavBar";
 import { jwtDecode } from "jwt-decode";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
   let decodedToken;
@@ -22,7 +23,11 @@ function App() {
         <Route path="/Register" element={<Regiter />} />
         <Route
           path="/dashboard"
-          element={[<NavBar />, <DashBoard user={decodedToken?.user} />]}
+          element={[
+            <PrivateRoute>
+              <NavBar />, <DashBoard user={decodedToken?.user} />
+            </PrivateRoute>,
+          ]}
         />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />

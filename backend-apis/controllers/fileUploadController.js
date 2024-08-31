@@ -9,8 +9,11 @@ exports.analyzeFile = async (req, res) => {
   // Get the file extension
   const fileExtension = extname(file.filename).toLowerCase();
 
-  if (![".py", ".js", ".jsx", ".java"].includes(fileExtension))
+  if (![".py", ".js", ".jsx", ".java"].includes(fileExtension)) {
+    // Remove the uploaded file after analysis
+    await fileService.removeFile(filePath);
     return res.status(500).send({ message: "Unsupported File Type Provided" });
+  }
 
   try {
     let complexityReport;

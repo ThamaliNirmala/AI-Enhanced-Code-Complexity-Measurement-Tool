@@ -43,7 +43,7 @@ const DashBoard = ({ user }) => {
   return (
     <>
       <div className="dashboard-body h-lvh ">
-        <Greeting role={user.role} />
+        <Greeting role={user?.role} />
         {!Object.keys(complexities).length ? (
           <Spin spinning={loading}>
             <div className="md:mx-32 mx-5">

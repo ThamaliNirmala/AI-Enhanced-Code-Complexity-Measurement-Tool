@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigatye = useNavigate();
   return (
     <div>
       <nav class="bg-white border-gray-200  fixed top-0 left-0 right-0">
@@ -20,7 +21,13 @@ const NavBar = () => {
             </span>
           </a>
           <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-[#244496] rounded-lg group bg-[#244496] hover:text-white  ">
+            <button
+              class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-[#244496] rounded-lg group bg-[#244496] hover:text-white  "
+              onClick={() => {
+                localStorage.clear();
+                navigatye("/");
+              }}
+            >
               <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
                 Logout
               </span>
