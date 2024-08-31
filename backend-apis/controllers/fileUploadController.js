@@ -1,0 +1,42 @@
+const path = require("path");
+const fileService = require("../services/fileService");
+const { extname } = require("path");
+
+exports.analyzeFile = async (req, res) => {
+  const file = req.file;
+  const filePath = path.join(__dirname, "../uploads/", file.filename);
+
+  // Get the file extension
+  const fileExtension = extname(file.originalname).toLowerCase();
+
+  try {
+    let complexityReport;
+
+    if (fileExtension === ".js" || fileExtension === ".jsx") {
+      // Analyze JavaScript code complexity
+      complexityReport = await fileService.analyzeJavaScript(
+        filePath
+      );
+    } else if (fileExtension === ".py") {
+      // Analyze Python code complexity
+      complexityReport = await fileService.analyzePython(filePath);
+    } else if(fileExtension === ".java") {
+      // Analyze Java code complexity
+      complexityReport = await fileService.analyzeJavaCode(filePath);
+    } else {
+      throw new Error("Unsupported file type");
+    }
+
+    // Remove the uploaded file after analysis
+    await fileService.removeFile(filePath);
+
+    res.send({
+      filename: file.originalname,
+      complexity: complexityReport,
+      fileExtension
+    });
+  } catch (error) {
+    console.error("Error processing the file:", error);
+    res.status(500).send("An error occurred while processing the file.");
+  }
+};

@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: AI-Enhanced-Code-Complexity-Measurement-Tool API
+  version: 1.0.0
+  description: API documentation for your Express application
+servers:
+  - url: http://localhost:5000
+
+paths:
+  /api/auth/register:
+    post:
+      summary: Register a new user
+      description: Creates a new user account.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+      responses:
+        201:
+          description: User registered successfully
+        400:
+          description: Invalid input data
+
+  /api/auth/login:
+    post:
+      summary: Log in a user
+      description: Authenticates a user and returns a JWT token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: User logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        401:
+          description: Unauthorized - Invalid credentials
+
+  /api/auth/forgot-password:
+    post:
+      summary: Forgot password
+      description: Sends a password reset email.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        200:
+          description: Reset email sent successfully
+        404:
+          description: User not found
+
+  /api/auth/reset-password/{resetToken}:
+    post:
+      summary: Reset password
+      description: Resets the user's password using the provided token.
+      parameters:
+        - name: resetToken
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The reset token sent in the password reset email.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                confirmPassword:
+                  type: string
+      responses:
+        200:
+          description: Password reset successfully
+        400:
+          description: Invalid token or passwords do not match
+  
+  /api/dashboard/files/upload:
+    post:
+      summary: Upload a file
+      description: Uploads a file and returns its content.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: File uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filename:
+                    type: string
+                  content:
+                    type: string
+        500:
+          description: Server error
