@@ -38,9 +38,9 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 h-screen">
+    <div className="grid md:grid-cols-2 h-screen">
       <div
-        className="bg-cover bg-center"
+        className="bg-cover bg-center md:block hidden"
         style={{
           backgroundImage: `url(${Background})`,
           backgroundRepeat: "no-repeat",
@@ -48,7 +48,7 @@ const ForgotPassword = () => {
           backgroundPosition: "center",
         }}
       ></div>
-      <div className="mx-36">
+      <div className="xl:mx-36 md:mx-20 mx-10">
         <Link to={"/"}>
           <div className="flex gap-1 mt-7 cursor-pointer">
             <img src={BackArrow} />
@@ -106,7 +106,7 @@ const ForgotPassword = () => {
           </Form.Item>
         </Form>
         <div className="relative flex justify-center ">
-          <img src={Logo} className="fixed bottom-0 mb-16" />
+          <img src={Logo} className="fixed bottom-0 mb-16  md:block hidden" />
         </div>
       </div>
     </div>
