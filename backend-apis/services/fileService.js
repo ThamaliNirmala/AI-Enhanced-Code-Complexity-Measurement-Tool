@@ -95,7 +95,52 @@ const analyzePython = (filePath) => {
                 console.error("Error deleting the report file:", unlinkErr);
             });
 
-            resolve(reportData);
+            function convertToMarkdown(reportData) {
+              const lines = reportData.split("\r\n");
+
+              // Extract and process the file path and summary
+              const filePath = lines[0].split("\\").pop();
+              const summaryLines = lines.slice(-3);
+              const analysisLines = lines.slice(1, -3);
+
+              // Convert analysis lines to Markdown
+              const markdownLines = analysisLines
+                .map((line) => {
+                  const match = line.match(/(\d+):(\d+) (\S+) - ([A-Z])/);
+                  if (match) {
+                    const [_, lineNumber, , methodName, grade] = match;
+                    return `- **Line ${lineNumber}**: \`${methodName}\` - Grade ${grade}`;
+                  }
+                  return "";
+                })
+                .filter((line) => line.trim() !== "");
+
+              // Process summary lines for total blocks and average complexity
+              const totalBlocksMatch = summaryLines[0].match(/(\d+) blocks/);
+              const averageComplexityMatch = summaryLines[1].match(
+                /Average complexity: ([A-Z]) \(([\d.]+)\)/
+              );
+
+              const totalBlocks = totalBlocksMatch
+                ? totalBlocksMatch[1]
+                : "N/A";
+              const averageComplexityGrade = averageComplexityMatch
+                ? averageComplexityMatch[1]
+                : "N/A";
+              const averageComplexityValue = averageComplexityMatch
+                ? averageComplexityMatch[2]
+                : "N/A";
+
+              // Construct Markdown content
+              return `## File: ${filePath}\n\n### Analyzed Blocks\n\n${markdownLines.join(
+                "\n"
+              )}\n\n---\n\n**Summary**\n\n- **Total Analyzed Blocks**: ${totalBlocks}\n- **Average Complexity**: Grade ${averageComplexityGrade} (${averageComplexityValue})`;
+            }
+
+            // Convert and print the Markdown content
+            const markdownContent = convertToMarkdown(reportData);
+
+            resolve(markdownContent);
           });
         });
       }
@@ -124,7 +169,19 @@ const analyzeJavaCode = (filePath) => {
             console.error("Error deleting the report file:", unlinkErr);
         });
 
-        resolve(reportData);
+        const markdownContent = reportData
+          .split("\r\n")
+          .map((line) => {
+            const [filePath, lineNumber, rule] = line.split("\t");
+            if (lineNumber && rule)
+              return `### ${filePath
+                .split("\\")
+                .pop()} Line ${lineNumber}\n**Rule**: ${rule}\n`;
+            return "";
+          })
+          .filter((line) => line.trim() !== "")
+          .join("\n\n");
+        resolve(markdownContent);
       });
     });
   });

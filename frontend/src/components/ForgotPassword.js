@@ -4,14 +4,14 @@ import BackArrow from "../assets/backArrow.svg";
 import Logo from "../assets/logo.svg";
 import { Form, Input, Button, notification } from "antd";
 import { MailOutlined } from "@ant-design/icons";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import axiosInstance from "../apis/axiosInstance";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ForgotPassword = () => {
   const onFinish = async (values) => {
     try {
-      await axios.post(
+      await axiosInstance.post(
         `${REACT_APP_BASE_URL}/api/auth/forgot-password`,
         values
       );
@@ -59,7 +59,7 @@ const ForgotPassword = () => {
           className="text-center text-[40px]/[135%] font-bold mt-7 text-[#10002E] uppercase"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          Forgot <br/> Password
+          Forgot <br /> Password
         </h1>
 
         <hr />

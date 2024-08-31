@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const { analyzeFile } = require("../controllers/fileUploadController");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 // Set up storage configuration with original filename
 const storage = multer.diskStorage({
@@ -16,6 +17,11 @@ const storage = multer.diskStorage({
 // Create the multer instance with the custom storage
 const upload = multer({ storage: storage });
 
-router.post("/files/upload", upload.single("file"), analyzeFile);
+router.post(
+  "/files/upload",
+  authMiddleware,
+  upload.single("file"),
+  analyzeFile
+);
 
 module.exports = router;

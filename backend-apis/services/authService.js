@@ -18,7 +18,7 @@ exports.login = async (email, password) => {
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
-    return generateToken(user._id);
+    return generateToken(user);
   } else {
     throw new Error("Invalid email or password");
   }

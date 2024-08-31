@@ -7,33 +7,32 @@ exports.analyzeFile = async (req, res) => {
   const filePath = path.join(__dirname, "../uploads/", file.filename);
 
   // Get the file extension
-  const fileExtension = extname(file.originalname).toLowerCase();
+  const fileExtension = extname(file.filename).toLowerCase();
+
+  if (![".py", ".js", ".jsx", ".java"].includes(fileExtension))
+    return res.status(500).send({ message: "Unsupported File Type Provided" });
 
   try {
     let complexityReport;
 
     if (fileExtension === ".js" || fileExtension === ".jsx") {
       // Analyze JavaScript code complexity
-      complexityReport = await fileService.analyzeJavaScript(
-        filePath
-      );
+      complexityReport = await fileService.analyzeJavaScript(filePath);
     } else if (fileExtension === ".py") {
       // Analyze Python code complexity
       complexityReport = await fileService.analyzePython(filePath);
-    } else if(fileExtension === ".java") {
+    } else if (fileExtension === ".java") {
       // Analyze Java code complexity
       complexityReport = await fileService.analyzeJavaCode(filePath);
-    } else {
-      throw new Error("Unsupported file type");
     }
 
     // Remove the uploaded file after analysis
     await fileService.removeFile(filePath);
 
-    res.send({
+    return res.send({
       filename: file.originalname,
       complexity: complexityReport,
-      fileExtension
+      fileExtension,
     });
   } catch (error) {
     console.error("Error processing the file:", error);

@@ -5,7 +5,7 @@ import Logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { Form, Input, Button, Select, notification } from "antd";
 import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons";
-import axios from "axios";
+import axiosInstance from "../apis/axiosInstance";
 const { REACT_APP_BASE_URL } = process.env;
 
 const { Option } = Select;
@@ -15,7 +15,7 @@ const Register = () => {
 
   const onFinish = async (values) => {
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `${REACT_APP_BASE_URL}/api/auth/register`,
         values
       );

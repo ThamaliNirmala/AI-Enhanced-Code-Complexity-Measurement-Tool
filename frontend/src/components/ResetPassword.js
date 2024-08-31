@@ -5,7 +5,7 @@ import Logo from "../assets/logo.svg";
 import { Link, useParams } from "react-router-dom";
 import { Form, Input, Button, notification } from "antd";
 import { LockOutlined } from "@ant-design/icons";
-import axios from "axios";
+import axiosInstance from "../apis/axiosInstance";
 const { REACT_APP_BASE_URL } = process.env;
 
 const ResetPassword = () => {
@@ -15,7 +15,7 @@ const ResetPassword = () => {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `${REACT_APP_BASE_URL}/api/auth/reset-password/${token}`,
         {
           newPassword: values.password,
