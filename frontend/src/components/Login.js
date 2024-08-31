@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Background from "../assets/b6.jpg";
+import Logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { Form, Input, Button, notification } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
@@ -60,8 +61,11 @@ const Login = () => {
         }}
       ></div>
       <div className="mx-36">
-        <h1 className="text-center font-bold mt-20 text-[#650D26]">
-          <span
+        <h1
+          className="text-center text-[40px] font-bold mt-20 text-[#10002E] uppercase"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
+          {/* <span
             className="text-[40px] uppercase"
             style={{ fontFamily: "Montserrat Alternates" }}
           >
@@ -69,7 +73,8 @@ const Login = () => {
           </span>
           <span className="block text-2xl" style={{ fontFamily: "Inter" }}>
             AI-Powered Code Complexity Analyzer
-          </span>
+          </span> */}
+          Login
         </h1>
         <hr className="mt-12" />
 
@@ -90,11 +95,11 @@ const Login = () => {
               },
               { required: true, message: "Please input your email!" },
             ]}
-            className="text-sm font-bold inter text-[#10002E]"
+            className="text-sm inter text-[#10002E]"
           >
             <Input
               prefix={<MailOutlined />}
-              className="bg-[#F5F8FF] h-12 text-gray-900 text-sm inter bold rounded-lg w-full p-2.5"
+              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
             />
           </Form.Item>
 
@@ -102,43 +107,47 @@ const Login = () => {
             name="password"
             label="Password"
             rules={[{ required: true, message: "Please input your password!" }]}
-            className="text-sm font-bold inter text-[#10002E]"
+            className="text-sm inter text-[#10002E]"
           >
             <Input.Password
               prefix={<LockOutlined />}
-              className="bg-[#F5F8FF] h-12 text-gray-900 text-sm inter bold rounded-lg w-full p-2.5"
+              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
             />
           </Form.Item>
 
-          <p className="mt-8 text-right">
-            <Link
-              to={"/forgot-password"}
-              className="no-underline text-base font-medium text-[#1565d8]"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              Forgot Password
-            </Link>
-          </p>
+          <div className="grid grid-cols-2">
+            <p className="text-left">
+              <Link
+                to={"/forgot-password"}
+                className="no-underline text-[10px] font-medium text-[#1565d8] inter"
+              >
+                Forgot Password
+              </Link>
+            </p>
 
-          <div className="mt-8 text-right">
-            <Link
-              to={"/register"}
-              className="no-underline text-base font-medium text-[#1565d8]"
-            >
-              Create account
-            </Link>
+            <div className="text-right">
+              <Link
+                to={"/register"}
+                className="no-underline text-[10px] font-medium text-[#1565d8] inter"
+              >
+                Create account
+              </Link>
+            </div>
           </div>
 
-          <Form.Item className="mt-16">
+          <Form.Item className="mt-20">
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full h-12 bg-[#002140] text-white font-medium rounded-lg text-sm px-5 py-2.5"
+              className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button h-9"
             >
               Log In
             </Button>
           </Form.Item>
         </Form>
+        <div className="relative flex justify-center ">
+          <img src={Logo} className="fixed bottom-0 mb-16" />
+        </div>
       </div>
     </div>
   );

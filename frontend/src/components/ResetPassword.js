@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import Background from "../assets/b6.jpg";
+import BackArrow from "../assets/backArrow.svg";
+import Logo from "../assets/logo.svg";
+import { Link, useParams } from "react-router-dom";
 import { Form, Input, Button, notification } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import axios from "axios";
@@ -12,13 +15,17 @@ const ResetPassword = () => {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      const response = await axios.post(`${REACT_APP_BASE_URL}/api/auth/reset-password/${token}`, {
-        newPassword: values.password,
-      });
+      const response = await axios.post(
+        `${REACT_APP_BASE_URL}/api/auth/reset-password/${token}`,
+        {
+          newPassword: values.password,
+        }
+      );
 
       notification.success({
         message: "Password Reset Successful",
-        description: "Your password has been reset successfully. You can now log in with your new password.",
+        description:
+          "Your password has been reset successfully. You can now log in with your new password.",
       });
 
       // Redirect or navigate to login page
@@ -26,7 +33,9 @@ const ResetPassword = () => {
     } catch (error) {
       notification.error({
         message: "Password Reset Failed",
-        description: error.response?.data?.message || "Something went wrong. Please try again.",
+        description:
+          error.response?.data?.message ||
+          "Something went wrong. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -41,11 +50,30 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 h-screen flex items-center justify-center">
-      <div className="w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-center text-2xl font-bold text-[#650D26] mb-6">
-          Reset Password
+    <div className="grid grid-cols-2 h-screen">
+      <div
+        className="bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${Background})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      ></div>
+      <div className="mx-36">
+        <Link to={"/"}>
+          <div className="flex gap-1 mt-7 cursor-pointer">
+            <img src={BackArrow} />
+            <p className="inter text-base text-[#8692A6]">Back</p>
+          </div>
+        </Link>
+        <h1
+          className="text-center text-[40px]/[135%] font-bold mt-7 text-[#10002E] uppercase"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
+          Reset <br/> Password
         </h1>
+        <hr className="" />
 
         <Form
           name="reset-password"
@@ -61,26 +89,33 @@ const ResetPassword = () => {
               { min: 6, message: "Password must be at least 6 characters!" },
             ]}
             hasFeedback
+            className="mt-20 text-sm inter text-[#10002E]"
           >
             <Input.Password
               prefix={<LockOutlined />}
               placeholder="Enter your new password"
+              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
             />
           </Form.Item>
 
           <Form.Item
             name="confirm"
+            className="text-sm inter text-[#10002E]"
             label="Confirm Password"
-            dependencies={['password']}
+            dependencies={["password"]}
             hasFeedback
             rules={[
               { required: true, message: "Please confirm your password!" },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue('password') === value) {
+                  if (!value || getFieldValue("password") === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error("The two passwords that you entered do not match!"));
+                  return Promise.reject(
+                    new Error(
+                      "The two passwords that you entered do not match!"
+                    )
+                  );
                 },
               }),
             ]}
@@ -88,6 +123,7 @@ const ResetPassword = () => {
             <Input.Password
               prefix={<LockOutlined />}
               placeholder="Confirm your new password"
+              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
             />
           </Form.Item>
 
@@ -95,13 +131,16 @@ const ResetPassword = () => {
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full bg-[#002140] text-white"
+              className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button inter h-9 mt-3"
               loading={loading}
             >
               Reset Password
             </Button>
           </Form.Item>
         </Form>
+        <div className="relative flex justify-center ">
+          <img src={Logo} className="fixed bottom-0 mb-16" />
+        </div>
       </div>
     </div>
   );

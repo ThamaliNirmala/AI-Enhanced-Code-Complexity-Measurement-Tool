@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Background from "../assets/b6.jpg";
+import Logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 import { Form, Input, Button, Select, notification } from "antd";
 import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons";
@@ -55,8 +56,11 @@ const Register = () => {
         }}
       ></div>
       <div className="mx-36">
-        <h1 className="text-center font-bold mt-20 text-[#650D26]">
-          <span
+        <h1
+          className="text-center text-[40px] font-bold mt-10 text-[#10002E] uppercase"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
+          {/* <span
             className="text-[40px] uppercase"
             style={{ fontFamily: "Montserrat Alternates" }}
           >
@@ -64,10 +68,11 @@ const Register = () => {
           </span>
           <span className="block text-2xl" style={{ fontFamily: "Inter" }}>
             AI-Powered Code Complexity Analyzer
-          </span>
+          </span> */}
+          Register
         </h1>
 
-        <hr className="mt-12" />
+        <hr className="mt-5" />
 
         <Form
           name="register"
@@ -80,11 +85,11 @@ const Register = () => {
             name="username"
             label="User Name"
             rules={[{ required: true, message: "Please input your username!" }]}
-            className="text-sm font-bold inter text-[#10002E]"
+            className="text-sm inter text-[#10002E]"
           >
             <Input
               prefix={<UserOutlined />}
-              className="bg-[#F5F8FF] h-12 text-gray-900 text-sm bold inter rounded-lg w-full p-2.5"
+              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
             />
           </Form.Item>
 
@@ -98,11 +103,11 @@ const Register = () => {
               },
               { required: true, message: "Please input your email!" },
             ]}
-            className="text-sm font-bold inter text-[#10002E]"
+            className="text-sm inter text-[#10002E]"
           >
             <Input
               prefix={<MailOutlined />}
-              className="bg-[#F5F8FF] h-12 text-gray-900 text-sm bold inter rounded-lg w-full p-2.5"
+              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
             />
           </Form.Item>
 
@@ -114,11 +119,11 @@ const Register = () => {
               { min: 6, message: "Password must be at least 6 characters!" },
             ]}
             hasFeedback
-            className="text-sm font-bold inter text-[#10002E]"
+            className="text-sm inter text-[#10002E]"
           >
             <Input.Password
               prefix={<LockOutlined />}
-              className="bg-[#F5F8FF] h-12 text-gray-900 text-sm bold inter rounded-lg w-full p-2.5"
+              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
             />
           </Form.Item>
 
@@ -142,11 +147,11 @@ const Register = () => {
                 },
               }),
             ]}
-            className="text-sm font-bold inter text-[#10002E]"
+            className="text-sm inter text-[#10002E]"
           >
             <Input.Password
               prefix={<LockOutlined />}
-              className="bg-[#F5F8FF] h-12 text-gray-900 text-sm bold inter rounded-lg w-full p-2.5"
+              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
             />
           </Form.Item>
 
@@ -154,11 +159,11 @@ const Register = () => {
             name="role"
             label="User Role"
             rules={[{ required: true, message: "Please select your role!" }]}
-            className="text-sm font-bold inter text-[#10002E]"
+            className="text-sm inter text-[#10002E]"
           >
             <Select
               placeholder="Select a role"
-              className="bg-[#F5F8FF] text-[#10002E] h-12 text-sm rounded-lg w-full inter p-2.5"
+              className="bg-[#F5F8FF] text-[#10002E] text-sm inter"
             >
               <Option value="developer">Developer</Option>
               <Option value="hr">HR</Option>
@@ -166,25 +171,29 @@ const Register = () => {
             </Select>
           </Form.Item>
 
-          <div className="text-right mt-8">
+          <div className="text-right">
             <Link
               to={"/"}
-              className="no-underline text-base font-medium text-[#1565d8]"
+              className="no-underline text-[10px] font-medium text-[#1565d8] inter"
             >
               Already have an account?
             </Link>
           </div>
 
-          <Form.Item className="mt-8">
+          <Form.Item className="mt-2">
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full h-12 bg-[#002140] text-white font-medium rounded-lg text-sm px-5 py-2.5"
+              className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button inter"
             >
               Sign Up
             </Button>
           </Form.Item>
         </Form>
+
+        <div className="relative flex justify-center ">
+          <img src={Logo} className="fixed bottom-0 mb-5" />
+        </div>
       </div>
     </div>
   );
