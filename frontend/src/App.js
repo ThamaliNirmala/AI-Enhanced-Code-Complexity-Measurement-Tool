@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Login from "./components/Login";
 import DashBoard from "./components/DashBoard";
 import Regiter from "./components/Regiter";
@@ -10,12 +10,23 @@ import UserDashboard from "./components/UserDashboard";
 import NavBar from "./components/NavBar";
 import { jwtDecode } from "jwt-decode";
 import PrivateRoute from "./PrivateRoute";
+import { useEffect, useState } from "react";
 
 function App() {
-  let decodedToken;
-  if (localStorage.getItem("token")) {
-    decodedToken = jwtDecode(localStorage.getItem("token"), { header: false });
-  }
+  const [decodedToken, setDecodedToken] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decoded = jwtDecode(token);
+      setDecodedToken(decoded);
+    } else {
+      setDecodedToken(null);
+    }
+  }, [localStorage.getItem("token"), location]);
+
+  console.log("decodedToken", decodedToken);
   return (
     <>
       <Routes>
