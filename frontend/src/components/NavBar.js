@@ -3,8 +3,8 @@ import React from "react";
 const NavBar = () => {
   return (
     <div>
-      <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4">
+      <nav class="bg-white border-gray-200 dark:bg-gray-900 fixed top-0 left-0 right-0">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2">
           <a
             href="https://flowbite.com/"
             class="flex items-center space-x-3 rtl:space-x-reverse"
@@ -14,7 +14,7 @@ const NavBar = () => {
               class="h-8"
               alt="Flowbite Logo"
             />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white inter">
+            <span class="self-center md:text-xl text-sm font-semibold whitespace-nowrap dark:text-white inter">
               AI-Powered Code Complexity Analyzer
             </span>
           </a>
