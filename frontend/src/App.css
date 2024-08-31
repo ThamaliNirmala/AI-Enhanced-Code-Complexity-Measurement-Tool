@@ -24,3 +24,7 @@ label{
 .inter{
   font-family: Inter, sans-serif !important;
 }
+
+.dashboard-body{
+  background-color: #F0F0F9;
+}

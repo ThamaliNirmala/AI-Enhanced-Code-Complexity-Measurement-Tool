@@ -5,16 +5,21 @@ import DashBoard from "./components/DashBoard";
 import Regiter from "./components/Regiter";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+import DeveloperDashBoard from "./components/DeveloperDashBoard";
+import ManagerDashboard from "./components/ManagerDashboard";
 
 function App() {
   return (
     <>
+    
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/Register" element={<Regiter />} />
         <Route path="/dashboard" element={<DashBoard />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/developer-dashboard" element={<DeveloperDashBoard />} />
+        <Route path="/manager-dashboard" element={<ManagerDashboard />} />
       </Routes>
     </>
   );

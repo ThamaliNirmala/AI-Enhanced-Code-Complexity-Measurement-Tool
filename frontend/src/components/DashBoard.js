@@ -6,12 +6,12 @@ const DashBoard = () => {
   return (
     <>
       <NavBar />
-      <div className="bg-[#F0F0F9] h-lvh ">
+      <div className="dashboard-body h-lvh ">
         <div className="md:mx-32 mx-5">
           <h1 className="md:pt-24 pt-28 inter font-bold text-lg">
             Hi Good morning! Developer
           </h1>
-          <div className="md:mx-40 mx-1 bg-[#F3F5F7] md:mt-16 mt-10">
+          <div className="md:mx-40 mx-1 bg-[#F3F5F7] mt-6">
             <div className="p-4 text-center">Paste your code Snippet Here</div>
           </div>
           <h1 className="uppercase inter font-bold text-center my-10">or</h1>
