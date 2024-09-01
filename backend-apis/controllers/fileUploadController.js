@@ -1,5 +1,6 @@
 const path = require("path");
 const fileService = require("../services/fileService");
+const { genAIService } = require("../services/genAIService");
 const { extname } = require("path");
 
 exports.analyzeFile = async (req, res) => {
@@ -29,12 +30,16 @@ exports.analyzeFile = async (req, res) => {
       complexityReport = await fileService.analyzeJavaCode(filePath);
     }
 
+    const fileContent = await fileService.readFile(filePath);
+    const aiSuggestedData = await genAIService(fileContent, fileExtension);
+
     // Remove the uploaded file after analysis
     await fileService.removeFile(filePath);
 
     return res.send({
       filename: file.originalname,
       complexity: complexityReport,
+      aiSuggestedData,
       fileExtension,
     });
   } catch (error) {

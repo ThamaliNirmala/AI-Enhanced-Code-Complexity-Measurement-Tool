@@ -1,6 +1,7 @@
 import React from "react";
 import ErrorsAndBugs from "./DashboardSubComponents/ErrorsAndBugs";
 import Analytics from "./DashboardSubComponents/Analytics";
+import CodeImprovements from "./DashboardSubComponents/CodeImprovements";
 
 const DeveloperDashBoard = ({ complexities }) => {
   return (
@@ -19,12 +20,10 @@ const DeveloperDashBoard = ({ complexities }) => {
                 <ErrorsAndBugs bugs={complexities.complexity} />
               )}
             </div>
-            <div className="md:col-span-2">
-              <h1 className="text-[#696F79] font-bold text-base inter text-center">
-                Suggested Code Improvements and comments
-              </h1>
-              <div className="bg-[#FFFFFF] mt-4 p-2">3</div>
-            </div>
+            <CodeImprovements
+              aiSuggestedData={complexities?.aiSuggestedData}
+              fileName={complexities.filename}
+            />
           </div>
         </div>
       </div>

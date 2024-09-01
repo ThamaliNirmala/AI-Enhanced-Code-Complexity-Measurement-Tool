@@ -29,6 +29,8 @@ import objectivec from "highlight.js/lib/languages/objectivec";
 import swift from "highlight.js/lib/languages/swift";
 import graphql from "highlight.js/lib/languages/graphql";
 import { generateRandomFilename, languageExtensions } from "../helpers/helper";
+import { Button, message } from "antd";
+import { CopyOutlined, DownloadOutlined } from "@ant-design/icons";
 
 // Register languages
 hljs.registerLanguage("javascript", javascript);
@@ -74,15 +76,15 @@ const CodeEditor = ({ setFile, setIsEnabledUpload, isEnabledEditor }) => {
   };
 
   const handleCodeChange = (event) => {
-    if (event.target.value) setIsEnabledUpload(false);
+    if (event.target.value.trim()) setIsEnabledUpload(false);
     else setIsEnabledUpload(true);
     setCode(event.target.value);
   };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      message.info("Text copied to clipboard")
+
     });
   };
 
@@ -98,7 +100,20 @@ const CodeEditor = ({ setFile, setIsEnabledUpload, isEnabledEditor }) => {
     const file = new File([blob], filename, { type: "text/plain" });
 
     if (code) setFile(file); // Save file object to state
-    else setFile(null)
+    else setFile(null);
+  };
+
+  const handleDownload = () => {
+    const filename = `${generateRandomFilename()}${getFileExtension(language)}`;
+    const blob = new Blob([code], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   console.log("Lang", language);
@@ -114,6 +129,7 @@ const CodeEditor = ({ setFile, setIsEnabledUpload, isEnabledEditor }) => {
         style={{ width: "100%", fontFamily: "monospace" }}
         disabled={!isEnabledEditor}
         className={`${!isEnabledEditor && "cursor-not-allowed"}`}
+        placeholder="Start typing your code here..."
       />
       <p>
         ⚠️ Automatic language detection with highlight might produce invalid
@@ -126,19 +142,41 @@ const CodeEditor = ({ setFile, setIsEnabledUpload, isEnabledEditor }) => {
           position: "absolute",
           top: "0",
           right: "0",
-          padding: "0.5rem",
-          backgroundColor: "#007bff",
+          padding: "0.2rem",
+          backgroundColor: "gray",
           color: "#fff",
           border: "none",
           cursor: "pointer",
         }}
       >
-        {language}
+       <CopyOutlined /> {language}
       </button>
-      {code && (
-        <SyntaxHighlighter language={language} style={solarizedlight}>
-          {code}
-        </SyntaxHighlighter>
+
+      {code.trim() && (
+        <Button
+          onClick={handleDownload}
+          style={{
+            position: "absolute",
+            top: "0",
+            right: "100px", // Adjust position to not overlap with copy Button
+            padding: "0.5rem",
+            backgroundColor: "#28a745",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer"
+          }}
+          icon={<DownloadOutlined />}
+        >
+          Download
+        </Button>
+      )}
+
+      {code.trim() && (
+        <>
+          <SyntaxHighlighter language={language} style={solarizedlight}>
+            {code}
+          </SyntaxHighlighter>
+        </>
       )}
     </div>
   );

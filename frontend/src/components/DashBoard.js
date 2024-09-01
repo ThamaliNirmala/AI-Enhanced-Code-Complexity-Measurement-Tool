@@ -4,8 +4,9 @@ import { Greeting } from "./helpers/helper";
 import CodeEditor from "./DashboardSubComponents/CodeEditor";
 import FileUpload from "./DashboardSubComponents/FileUpload";
 import axiosInstance from "../apis/axiosInstance";
-import { notification, Spin } from "antd";
+import { Button, notification, Spin } from "antd";
 import DeveloperDashBoard from "./DeveloperDashBoard";
+import { RedoOutlined, SaveOutlined } from "@ant-design/icons";
 const { REACT_APP_BASE_URL } = process.env;
 
 const DashBoard = ({ user }) => {
@@ -79,7 +80,30 @@ const DashBoard = ({ user }) => {
             </div>{" "}
           </Spin>
         ) : (
-          <DeveloperDashBoard complexities={complexities} />
+          <>
+            <div className="flex justify-end space-x-4 mt-4 md:mx-32 mx-5">
+              <Button
+                type="primary"
+                icon={<SaveOutlined />}
+                className="bg-blue-500 hover:bg-blue-600"
+              >
+                Save
+              </Button>
+              <Button
+                icon={<RedoOutlined />}
+                className="bg-gray-500 text-white hover:bg-gray-600"
+                onClick={() => {
+                  setComplexities({});
+                  setFile(null);
+                  setIsEnabledUpload(true);
+                  setIsEnabledEditor(true);
+                }}
+              >
+                Try another
+              </Button>
+            </div>
+            <DeveloperDashBoard complexities={complexities} />
+          </>
         )}
       </div>
     </>

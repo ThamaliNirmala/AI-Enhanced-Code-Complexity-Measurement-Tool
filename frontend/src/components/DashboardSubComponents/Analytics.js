@@ -21,8 +21,8 @@ const Analytics = ({ analytics, ext }) => {
             <HalsteadChart
               bugs={commonMethodAggregate?.halstead?.bugs}
               difficulty={commonMethodAggregate?.halstead?.difficulty}
-              effort={commonMethodAggregate?.halstead?.effort}
-              volume={commonMethodAggregate?.halstead?.volume}
+              sloc={analytics?.summary?.average?.sloc}
+              warnings={analytics?.summary?.total?.jshint }
             />
             <MaintainabilityChart
               maintainabilityIndex={

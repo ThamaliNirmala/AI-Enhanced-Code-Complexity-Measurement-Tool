@@ -11,7 +11,7 @@ import {
 
 const ComplexityChart = ({ cyclomatic, density }) => {
   const complexityData = [
-    { name: "Cyclomatic", value: cyclomatic },
+    { name: "Cyclomatic Complexity", value: cyclomatic },
     { name: "Cyclomatic Density", value: density },
   ];
   return (
