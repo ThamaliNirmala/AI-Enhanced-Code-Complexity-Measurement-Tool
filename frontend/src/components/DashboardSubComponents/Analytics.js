@@ -10,7 +10,7 @@ const Analytics = ({ analytics, ext }) => {
   const commonMethodAggregate =
     analytics?.reports?.[0]?.complexity?.methodAggregate;
   return (
-    <div className="md:col-span-1 bg-[#FFFFFF]">
+    <div className="bg-[#dce9f5] md:col-span-1 px-2">
       <div className="p-2">
         {ext === ".js" || ext === ".jsx" ? (
           <>

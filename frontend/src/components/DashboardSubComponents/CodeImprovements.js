@@ -11,9 +11,9 @@ const CodeImprovements = ({ aiSuggestedData, fileName }) => {
         <h1 className="text-[#696F79] font-bold text-base inter text-center">
           Suggested Code Improvements and Comments for <u>({fileName})</u>
         </h1>
-        <div className="bg-[#FFFFFF] mt-4 p-2">
+        <div className="bg-[#dce9f5] mt-4 py-4 px-6">
           <Markdown
-            className="text-justify mt-4 leading-loose"
+            className="text-justify leading-loose"
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
             components={{

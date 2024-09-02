@@ -6,10 +6,10 @@ import CodeImprovements from "./DashboardSubComponents/CodeImprovements";
 const DeveloperDashBoard = ({ complexities }) => {
   return (
     <>
-      <div className="dashboard-body h-lvh pt-6">
+      <div className="dashboard-body pt-6">
         <div className="md:mx-32 mx-5">
-          <div className="grid md:grid-cols-3 mt-6  gap-7">
-            <div className="grid grid-rows-2 gap-5">
+          <div className="md:grid md:grid-cols-3 mt-6  gap-7">
+            <div className="">
               {complexities.fileExtension !== ".java" && (
                 <Analytics
                   analytics={complexities.complexity}

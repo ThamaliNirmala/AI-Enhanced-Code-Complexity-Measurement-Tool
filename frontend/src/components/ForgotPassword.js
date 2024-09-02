@@ -99,14 +99,14 @@ const ForgotPassword = () => {
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button inter h-9 mt-3"
+              className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button inter h-9 "
             >
               Send Reset Link
             </Button>
           </Form.Item>
         </Form>
         <div className="relative flex justify-center ">
-          <img src={Logo} className="fixed bottom-0 mb-16  md:block hidden" />
+          <img src={Logo} className="fixed bottom-0 mb-24  md:block hidden w-56" />
         </div>
       </div>
     </div>

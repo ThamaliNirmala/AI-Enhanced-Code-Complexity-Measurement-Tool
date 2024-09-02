@@ -1,22 +1,23 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import DashboardLogo from "../assets/codeq.svg";
 
 const NavBar = () => {
   const navigatye = useNavigate();
   return (
-    <div>
-      <nav class="bg-white border-gray-200  fixed top-0 left-0 right-0">
+   
+      <nav class="bg-white border-gray-200  fixed top-0 left-0 right-0 z-10">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2">
           <a
-            href="https://flowbite.com/"
+            href="3"
             class="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              class="h-8"
-              alt="Flowbite Logo"
+              src={DashboardLogo}
+              class="h-10"
+              alt="CodeQ Logo"
             />
-            <span class="self-center md:text-xl text-sm font-semibold whitespace-nowrap text-[#244496] inter">
+            <span class="self-center md:text-xl text-sm font-semibold whitespace-nowrap text-[#002140] inter">
               AI-Powered Code Complexity Analyzer
             </span>
           </a>
@@ -83,7 +84,7 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
-    </div>
+   
   );
 };
 

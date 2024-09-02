@@ -43,12 +43,12 @@ const DashBoard = ({ user }) => {
 
   return (
     <>
-      <div className="dashboard-body h-lvh ">
+      <div className="dashboard-body pb-20">
         <Greeting role={user?.role} />
         {!Object.keys(complexities).length ? (
           <Spin spinning={loading}>
             <div className="md:mx-32 mx-5">
-              <div className="md:mx-40 mx-1 bg-[#F3F5F7] mt-6">
+              <div className="md:mx-40 mx-1 bg-[#dce9f5] mt-6 p-6">
                 <CodeEditor
                   setFile={setFile}
                   setIsEnabledUpload={setIsEnabledUpload}

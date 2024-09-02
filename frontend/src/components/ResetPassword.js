@@ -131,7 +131,7 @@ const ResetPassword = () => {
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button inter h-9 mt-3"
+              className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button inter h-9 "
               loading={loading}
             >
               Reset Password
@@ -139,7 +139,7 @@ const ResetPassword = () => {
           </Form.Item>
         </Form>
         <div className="relative flex justify-center ">
-          <img src={Logo} className="bottom-0 mb-16  md:block hidden fixed" />
+          <img src={Logo} className="bottom-0 mb-24  md:block hidden fixed w-56" />
         </div>
       </div>
     </div>

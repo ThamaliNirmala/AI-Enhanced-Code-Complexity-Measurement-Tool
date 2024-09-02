@@ -192,7 +192,7 @@ const Register = () => {
         </Form>
 
         <div className="relative flex justify-center ">
-          <img src={Logo} className=" bottom-0 mb-5 md:block hidden fixed" />
+          <img src={Logo} className=" bottom-0 mb-5 md:block hidden fixed w-56" />
         </div>
       </div>
     </div>

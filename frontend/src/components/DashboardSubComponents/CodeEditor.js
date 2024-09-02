@@ -126,12 +126,12 @@ const CodeEditor = ({ setFile, setIsEnabledUpload, isEnabledEditor }) => {
         value={code}
         onChange={handleCodeChange}
         rows="10"
-        style={{ width: "100%", fontFamily: "monospace" }}
+        style={{ width: "100%",  }}
         disabled={!isEnabledEditor}
         className={`${!isEnabledEditor && "cursor-not-allowed"}`}
         placeholder="Start typing your code here..."
       />
-      <p>
+      <p className="inter">
         ⚠️ Automatic language detection with highlight might produce invalid
         responses, so consider setting the language explicitly when precision is
         critical. (Use File Upload)

@@ -28,3 +28,8 @@ label{
 .dashboard-body{
   background-color: #F0F0F9;
 }
+
+.recharts-wrapper{
+  margin: auto ;
+  width: 100% !important;
+}

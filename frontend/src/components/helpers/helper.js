@@ -11,7 +11,7 @@ export const Greeting = ({ role }) => {
   }
 
   return (
-    <h1 className="md:pt-24 pt-28 inter font-bold text-lg md:mx-32 mx-5">
+    <h1 className="md:pt-20 pt-28 inter font-bold text-lg md:mx-32 mx-5">
       Hi, {greeting}! {role}
     </h1>
   );

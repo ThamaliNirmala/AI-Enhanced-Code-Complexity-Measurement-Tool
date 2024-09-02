@@ -2,7 +2,7 @@ import React from "react";
 
 const FileUpload = ({ setFile, setIsEnabledEditor, isEnabledUpload }) => {
   return (
-    <div className="md:mx-40 mx-1 bg-[#F3F5F7]">
+    <div className="md:mx-40 mx-1 bg-[#dce9f5]">
       <div
         className={`p-4 text-center ${
           !isEnabledUpload && "cursor-not-allowed"
@@ -22,7 +22,8 @@ const FileUpload = ({ setFile, setIsEnabledEditor, isEnabledUpload }) => {
             setFile(null);
             setIsEnabledEditor(true);
           }}
-          className={`${!isEnabledUpload && "cursor-not-allowed"}`}
+          className={`text-[#FF0000] hover:text-white border border-[#FF0000] hover:bg-[#FF0000] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ${!isEnabledUpload && "cursor-not-allowed"}`}
+          style={{ fontFamily: "'Inter', sans-serif"}}
         >
           Remove File
         </button>
