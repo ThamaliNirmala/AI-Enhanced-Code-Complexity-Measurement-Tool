@@ -67,79 +67,76 @@ const ResetPassword = () => {
             <p className="inter text-base text-[#8692A6]">Back</p>
           </div>
         </Link>
-        <h1
-          className="text-center text-[40px]/[135%] font-bold mt-7 text-[#10002E] uppercase"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          Reset <br /> Password
-        </h1>
-        <hr className="" />
+        <div className="my-[75px]">
+          <div className="relative flex justify-center ">
+            <img src={Logo} className=" md:block hidden w-[350px]" />
+          </div>
 
-        <Form
-          name="reset-password"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          layout="vertical"
-        >
-          <Form.Item
-            name="password"
-            label="New Password"
-            rules={[
-              { required: true, message: "Please input your new password!" },
-              { min: 6, message: "Password must be at least 6 characters!" },
-            ]}
-            hasFeedback
-            className="mt-20 text-sm inter text-[#10002E]"
+          <hr className="mt-12" />
+
+          <Form
+            name="reset-password"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            layout="vertical"
           >
-            <Input.Password
-              prefix={<LockOutlined />}
-              placeholder="Enter your new password"
-              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="confirm"
-            className="text-sm inter text-[#10002E]"
-            label="Confirm Password"
-            dependencies={["password"]}
-            hasFeedback
-            rules={[
-              { required: true, message: "Please confirm your password!" },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error(
-                      "The two passwords that you entered do not match!"
-                    )
-                  );
-                },
-              }),
-            ]}
-          >
-            <Input.Password
-              prefix={<LockOutlined />}
-              placeholder="Confirm your new password"
-              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
-            />
-          </Form.Item>
-
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button inter h-9 "
-              loading={loading}
+            <Form.Item
+              name="password"
+              label="New Password"
+              rules={[
+                { required: true, message: "Please input your new password!" },
+                { min: 6, message: "Password must be at least 6 characters!" },
+              ]}
+              hasFeedback
+              className="mt-16 text-sm inter text-[#10002E]"
             >
-              Reset Password
-            </Button>
-          </Form.Item>
-        </Form>
-        <div className="relative flex justify-center ">
-          <img src={Logo} className="bottom-0 mb-24  md:block hidden fixed w-56" />
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Enter your new password"
+                className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="confirm"
+              className="text-sm inter text-[#10002E]"
+              label="Confirm Password"
+              dependencies={["password"]}
+              hasFeedback
+              rules={[
+                { required: true, message: "Please confirm your password!" },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error(
+                        "The two passwords that you entered do not match!"
+                      )
+                    );
+                  },
+                }),
+              ]}
+            >
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Confirm your new password"
+                className="bg-[#F5F8FF]  text-[#10002E] text-sm inter"
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button inter h-9 "
+                loading={loading}
+              >
+                Reset Password
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
       </div>
     </div>

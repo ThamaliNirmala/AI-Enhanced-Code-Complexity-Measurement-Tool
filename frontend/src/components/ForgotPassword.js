@@ -48,65 +48,61 @@ const ForgotPassword = () => {
           backgroundPosition: "center",
         }}
       ></div>
-      <div className="xl:mx-36 md:mx-20 mx-10">
+      <div className="xl:mx-36 md:mx-20 mx-10 ">
         <Link to={"/"}>
           <div className="flex gap-1 mt-7 cursor-pointer">
             <img src={BackArrow} />
             <p className="inter  text-base text-[#8692A6]">Back</p>
           </div>
         </Link>
-        <h1
-          className="text-center text-[40px]/[135%] font-bold mt-7 text-[#10002E] uppercase"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          Forgot <br /> Password
-        </h1>
+        <div className="my-[75px]">
+          <div className="relative flex justify-center ">
+            <img src={Logo} className=" md:block hidden w-[350px]" />
+          </div>
 
-        <hr />
+          <hr className="mt-12" />
 
-        <Form
-          name="forgot-password"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          layout="vertical"
-          className="mt-20 text-sm inter text-[#10002E]"
-        >
-          <p className="font-medium text-base text-[#000000] inter">
-            Enter the your Email associate with the account
-          </p>
-          <p className="font-medium text-base text-[#B4B7B9] mt-2 mb-7 inter">
-            We will email you a link to rest your password
-          </p>
-          <Form.Item
-            name="email"
-            label="Email"
-            rules={[
-              {
-                type: "email",
-                message: "The input is not a valid E-mail!",
-              },
-              { required: true, message: "Please input your email!" },
-            ]}
+          <Form
+            name="forgot-password"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            layout="vertical"
+            className="mt-16 text-sm inter text-[#10002E]"
           >
-            <Input
-              prefix={<MailOutlined />}
-              placeholder="Enter your email"
-              className="bg-[#F5F8FF]  text-[#10002E] text-sm inter h-10"
-            />
-          </Form.Item>
-
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button inter h-9 "
+            <p className="font-medium text-base text-[#000000] inter">
+              Enter the your Email associate with the account
+            </p>
+            <p className="font-medium text-base text-[#B4B7B9] mt-2 mb-7 inter">
+              We will email you a link to rest your password
+            </p>
+            <Form.Item
+              name="email"
+              label="Email"
+              rules={[
+                {
+                  type: "email",
+                  message: "The input is not a valid E-mail!",
+                },
+                { required: true, message: "Please input your email!" },
+              ]}
             >
-              Send Reset Link
-            </Button>
-          </Form.Item>
-        </Form>
-        <div className="relative flex justify-center ">
-          <img src={Logo} className="fixed bottom-0 mb-24  md:block hidden w-56" />
+              <Input
+                prefix={<MailOutlined />}
+                placeholder="Enter your email"
+                className="bg-[#F5F8FF]  text-[#10002E] text-sm inter h-10"
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 custom-button inter h-9 "
+              >
+                Send Reset Link
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
       </div>
     </div>

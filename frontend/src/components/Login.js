@@ -61,24 +61,10 @@ const Login = () => {
         }}
       ></div>
       <div className="xl:mx-36 md:mx-20 mx-10 my-32">
-      <div className="relative flex justify-center ">
+        <div className="relative flex justify-center ">
           <img src={Logo} className=" md:block hidden w-[350px]" />
         </div>
-        {/* <h1
-          className="text-center text-[40px] font-bold  text-[#10002E] uppercase"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          <span
-            className="text-[40px] uppercase"
-            style={{ fontFamily: "Montserrat Alternates" }}
-          >
-            CodeIQ
-          </span>
-          <span className="block text-2xl" style={{ fontFamily: "Inter" }}>
-            AI-Powered Code Complexity Analyzer
-          </span>
-          Login
-        </h1> */}
+
         <hr className="mt-12" />
 
         <Form

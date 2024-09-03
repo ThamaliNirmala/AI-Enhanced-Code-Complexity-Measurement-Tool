@@ -55,23 +55,10 @@ const Register = () => {
           backgroundPosition: "center",
         }}
       ></div>
-      <div className="xl:mx-36 md:mx-20 mx-10">
-        <h1
-          className="text-center text-[40px] font-bold mt-10 text-[#10002E] uppercase"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          {/* <span
-            className="text-[40px] uppercase"
-            style={{ fontFamily: "Montserrat Alternates" }}
-          >
-            CodeIQ
-          </span>
-          <span className="block text-2xl" style={{ fontFamily: "Inter" }}>
-            AI-Powered Code Complexity Analyzer
-          </span> */}
-          Register
-        </h1>
-
+      <div className="xl:mx-36 md:mx-20 mx-10 mt-16">
+        <div className="relative flex justify-center ">
+          <img src={Logo} className=" md:block hidden w-[350px]" />
+        </div>
         <hr className="mt-5" />
 
         <Form
@@ -190,10 +177,6 @@ const Register = () => {
             </Button>
           </Form.Item>
         </Form>
-
-        <div className="relative flex justify-center ">
-          <img src={Logo} className=" bottom-0 mb-5 md:block hidden fixed w-56" />
-        </div>
       </div>
     </div>
   );

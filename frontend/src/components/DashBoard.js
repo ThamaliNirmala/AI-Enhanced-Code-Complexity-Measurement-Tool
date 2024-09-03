@@ -83,9 +83,8 @@ const DashBoard = ({ user }) => {
           <>
             <div className="flex justify-end space-x-4 mt-4 md:mx-32 mx-5">
               <Button
-                type="primary"
                 icon={<SaveOutlined />}
-                className="bg-blue-500 hover:bg-blue-600"
+                className="bg-blue-500 text-white hover:bg-blue-600"
               >
                 Save
               </Button>

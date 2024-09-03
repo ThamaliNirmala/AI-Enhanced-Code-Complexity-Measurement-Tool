@@ -126,7 +126,7 @@ const CodeEditor = ({ setFile, setIsEnabledUpload, isEnabledEditor }) => {
         value={code}
         onChange={handleCodeChange}
         rows="10"
-        style={{ width: "100%",  }}
+        style={{ width: "100%", fontFamily: "monospace" }}
         disabled={!isEnabledEditor}
         className={`${!isEnabledEditor && "cursor-not-allowed"}`}
         placeholder="Start typing your code here..."
