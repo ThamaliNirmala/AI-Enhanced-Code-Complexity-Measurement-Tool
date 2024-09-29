@@ -15,6 +15,7 @@ const DashBoard = ({ user }) => {
   const [isEnabledUpload, setIsEnabledUpload] = useState(true);
   const [loading, setLoading] = useState(false);
   const [complexities, setComplexities] = useState([]);
+  const [isFileSaved, setIsFileSaved] = useState(false);
 
   console.log("Uploaded File", file);
 
@@ -38,6 +39,28 @@ const DashBoard = ({ user }) => {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSaveInsights = async () => {
+    try {
+      await axiosInstance.post(
+        `${REACT_APP_BASE_URL}/api/insights/save/${user._id}`,
+        { insights: complexities }
+      );
+      setIsFileSaved(true);
+      notification.success({
+        message: "Code Insights Saved Successfully",
+        placement: "topRight",
+      });
+    } catch (error) {
+      notification.error({
+        message: "Request Failed",
+        description:
+          error.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      });
+      setIsFileSaved(false);
     }
   };
 
@@ -85,6 +108,8 @@ const DashBoard = ({ user }) => {
               <Button
                 icon={<SaveOutlined />}
                 className="bg-blue-500 text-white hover:bg-blue-600"
+                onClick={handleSaveInsights}
+                disabled={isFileSaved}
               >
                 Save
               </Button>
@@ -96,6 +121,7 @@ const DashBoard = ({ user }) => {
                   setFile(null);
                   setIsEnabledUpload(true);
                   setIsEnabledEditor(true);
+                  setIsFileSaved(false);
                 }}
               >
                 Try another

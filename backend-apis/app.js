@@ -8,6 +8,7 @@ const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
 const fileUploadRoutes = require("./routes/fileUploadRoutes");
+const dashBoardRoutes = require("./routes/insightsRoutes");
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(cors());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", fileUploadRoutes);
+app.use("/api/insights", dashBoardRoutes);
 
 // Swagger UI setup
 const swaggerSpec = yaml.load(

@@ -11,6 +11,7 @@ import NavBar from "./components/NavBar";
 import { jwtDecode } from "jwt-decode";
 import PrivateRoute from "./PrivateRoute";
 import { useEffect, useState } from "react";
+import SavedInsights from "./components/DashboardSubComponents/SavedInsights";
 
 function App() {
   const [decodedToken, setDecodedToken] = useState(null);
@@ -21,6 +22,7 @@ function App() {
     if (token) {
       const decoded = jwtDecode(token);
       setDecodedToken(decoded);
+      localStorage.setItem("userId", decoded?.user?._id);
     } else {
       setDecodedToken(null);
     }
@@ -37,6 +39,14 @@ function App() {
           element={[
             <PrivateRoute>
               <NavBar />, <DashBoard user={decodedToken?.user} />
+            </PrivateRoute>,
+          ]}
+        />
+        <Route
+          path="/dashboard/saved-insights"
+          element={[
+            <PrivateRoute>
+              <NavBar />, <SavedInsights />
             </PrivateRoute>,
           ]}
         />
